@@ -30,4 +30,10 @@ public class ServiceImp1 implements StudentService{
 		return repository.save(student);
 	}
 
+	@Override
+	public Student getStudentById(int id) {
+		// TODO Auto-generated method stub
+		return repository.findById(id).get();
+	}
+
 }
