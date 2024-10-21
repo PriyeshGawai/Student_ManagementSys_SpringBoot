@@ -48,4 +48,17 @@ public class Controller {
 		model.addAttribute("student",service.getStudentById(id));
 		return "edit_return";
 	}
+	
+	@PostMapping("/students/edit/{id}")
+	public String EditStudent(@PathVariable int id, @ModelAttribute("Student") Student student) {
+		
+		Student editStudent= service.getStudentById(id);
+		editStudent.setFirstName(student.getFirstName());
+		editStudent.setLastName(student.getLastName());
+		editStudent.setEmail(student.getEmail());
+		
+		service.saveStudent(editStudent);
+		
+		return "redirect:/students";
+	}
 }
