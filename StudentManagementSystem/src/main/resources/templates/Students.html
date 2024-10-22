@@ -56,7 +56,9 @@
 			<td th:text="${std.firstName}"></td>
 			<td th:text="${std.lastName}"></td>
 			<td th:text="${std.email}"></td>
-			<td> <a th:href="@{students/edit/{id} (id=${std.id})}" class="btn btn-info">Update</a></td>
+			<td> <a th:href="@{students/edit/{id} (id=${std.id})}" class="btn btn-info">Edit</a>
+			<a th:href="@{students/{id} (id=${std.id})}" class="btn btn-danger">Delete</a>
+			</td>
 		</tr>
 	</tbody>
 

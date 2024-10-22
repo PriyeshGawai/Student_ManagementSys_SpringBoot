@@ -61,4 +61,10 @@ public class Controller {
 		
 		return "redirect:/students";
 	}
+	
+	@GetMapping("students/{id}")
+	public String deleteById(@PathVariable int id) {
+		service.deleteById(id);
+		return "redirect:/students";
+	}
 }
