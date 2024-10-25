@@ -1,11 +1,16 @@
 package com.StudentManagementSystem.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.StudentManagementSystem.Entity.Student;
 import com.StudentManagementSystem.Service.StudentService;
@@ -27,6 +32,16 @@ public class Controller {
 		return "Students";
 	}
 	
+	/*
+	 * for testing using postman
+	 */
+	@GetMapping("/allStudents")
+	@ResponseBody
+	public List<Student> getAllStudents() {
+	    return service.getAllStudents();  // Return the list directly as JSON
+	}
+
+	
 	@GetMapping("students/new")
 	public String createStudentForm(Model model) {
 		Student student=new Student(); //Hold Student object
@@ -36,9 +51,9 @@ public class Controller {
 	
 	@PostMapping("/students")
 	public String saveStudent(@ModelAttribute("student") Student student ) {
-		 System.out.println("Student First Name: " + student.getFirstName());
-		    System.out.println("Student Last Name: " + student.getLastName());
-		    System.out.println("Student Email: " + student.getEmail());
+//		 System.out.println("Student First Name: " + student.getFirstName());
+//		    System.out.println("Student Last Name: " + student.getLastName());
+//		    System.out.println("Student Email: " + student.getEmail());
 		service.saveStudent(student);
 		return "redirect:/students";
 	}
@@ -66,5 +81,28 @@ public class Controller {
 	public String deleteById(@PathVariable int id) {
 		service.deleteById(id);
 		return "redirect:/students";
+	}
+	
+	/*
+	 * for testing using postman
+	 */
+	
+	@GetMapping("getStudentsById/{id}")
+	@ResponseBody
+	public Student getById(@PathVariable Integer id) {
+		return service.getStudentById(id);
+	}
+	
+	
+	@DeleteMapping("deleteStudentsById/{id}")
+	@ResponseBody
+	public void deleteById(@PathVariable Integer id) {
+		 service.deleteById(id);
+	}
+	
+	@PostMapping("addStudents")
+	@ResponseBody
+	public void addStudents(@RequestBody Student student) {
+		 service.saveStudent(student);
 	}
 }

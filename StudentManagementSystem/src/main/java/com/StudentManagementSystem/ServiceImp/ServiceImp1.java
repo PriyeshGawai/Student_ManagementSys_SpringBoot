@@ -42,4 +42,10 @@ public class ServiceImp1 implements StudentService{
 		
 	}
 
+	@Override
+	public void AddStudent(Student student) {
+		// TODO Auto-generated method stub
+		 repository.save(student);
+	}
+
 }
